@@ -11,7 +11,7 @@ from typing import Any, Dict, List
 import base64
 from io import BytesIO
 from PIL import Image
-
+import subprocess
 import cv2
 import numpy as np
 import streamlit as st
@@ -1595,8 +1595,8 @@ def main():
                         if capture_script.exists():
                             with st.spinner("Capturing..."):
                                 result = subprocess.run(
-                                    [str(REPO_ROOT / ".venv" / "Scripts" / "python.exe"), str(capture_script)],
-                                    input=person_name.strip(), text=True, capture_output=True, cwd=str(REPO_ROOT)
+                                    [sys.executable, str(train_script)],
+                                    capture_output=True, text=True, cwd=str(REPO_ROOT)
                                 )
                                 if result.returncode == 0:
                                     st.success(f"✅ Captured for {person_name}")
@@ -1612,7 +1612,7 @@ def main():
                     if train_script.exists():
                         with st.spinner("Training..."):
                             result = subprocess.run(
-                                [str(REPO_ROOT / ".venv" / "Scripts" / "python.exe"), str(train_script)],
+                                [sys.executable, str(train_script)],
                                 capture_output=True, text=True, cwd=str(REPO_ROOT)
                             )
                             if result.returncode == 0:
