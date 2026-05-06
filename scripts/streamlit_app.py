@@ -1595,7 +1595,7 @@ def main():
                         if capture_script.exists():
                             with st.spinner("Capturing..."):
                                 result = subprocess.run(
-                                    [sys.executable, str(train_script)],
+                                    [sys.executable, str(capture_script)],
                                     capture_output=True, text=True, cwd=str(REPO_ROOT)
                                 )
                                 if result.returncode == 0:
